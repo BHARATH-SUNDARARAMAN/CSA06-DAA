@@ -1,0 +1,157 @@
+1 qn:
+#include<stdio.h>
+void func(int min);
+int main(){
+    int n;
+    printf("enter a value:");
+    scanf("%d",&n);
+    func(n);
+    return 0;
+}
+void func(int n){
+    int count=0;
+    int i=1,s=1;
+    count++;
+    count++;
+    
+    while(s<=n){
+        count++;
+        i++;
+        count++;
+        s+=i;
+        count++;
+    }
+    count++;
+    printf("%d",count);
+}
+
+output:
+enter a value:5
+9
+
+2 qn:
+#include<stdio.h>
+void func(int min);
+int main(){
+    int n;
+    printf("enter a value:");
+    scanf("%d",&n);
+    func(n);
+    return 0;
+}
+void func(int n){
+    int count=0;
+    if(n==1){
+       count++;
+       count++; 
+    }
+    else{
+        count++;
+        for(int i=1;i<=n;i++){
+            count++;
+            for(int j=1;j<=n;j++){
+                count++;
+                count++;
+                count++;
+                count++;
+                break;
+            }
+        } count++;
+    }
+    printf("%d",count);
+    
+}
+
+output:
+enter a value:5
+27
+
+3 qn:
+#include<stdio.h>
+int factor(int n);
+int count=0;
+int main(){
+    int n;
+    printf("enter a value:");
+    scanf("%d",&n);
+    factor(n);
+    printf("%d",count);
+    return 0;
+}
+int factor(int n){
+    count++;
+    for(int i=1;i<=n;++i)
+    {
+        count++;
+        if(n%i==0){
+            //print
+        }count++;
+    }
+    count++;
+    return 0;
+}
+
+output:
+enter a value:4
+10
+
+4 qn:
+#include<stdio.h>
+void function(int n);
+int main(){
+	int n;
+	printf("enter a value:");
+	scanf("%d",&n);
+	function(n);
+	return 0;
+}
+void function(int n){
+	int count=0,c=0;
+	count++;
+	for(int i=n/2;i<n;i++){
+		count++;
+		for(int j=1;j<n;j=2*j){
+			count++;
+			for(int k=1;k<n;k=k*2){
+				count++;
+				c++;
+				count++;
+			}count++;
+		}count++;
+	}count++;
+	printf("%d",count);
+}
+
+output:
+enter a value:10
+212
+
+5 qn:
+#include<stdio.h>
+void reverse(int n);
+int main(){
+	int n;
+	scanf("%d",&n);
+	reverse(n);
+	return 0;
+}
+void reverse(int n){
+	int count=0,rev=0,remainder;
+	count++;
+	while(n!=0){
+		count++;
+		remainder=n%10;
+		count++;
+		rev=rev*10+remainder;
+		count++;
+		n=n/10;
+		count++;
+	}
+	count++;
+	count++;
+	printf("%d",count);
+}
+
+output:
+123
+15
