@@ -46,26 +46,40 @@ enter the no.of rows:5
 2.binary search
 
 #include<stdio.h>
-int bs(int arr[],int si,int key){
-    int ll=0,ul=si-1,mid,pos=-1;
-
+int count=0;
+int bs(int arr[],int size,int key){
+    int ll=0,ul=size-1,mid,pos=-1;
     while (ll<=ul)
-    {mid=(ll+ul)/2;
+    {
+    	count++;
+	mid=(ll+ul)/2;
+	    count++;
         if(arr[mid]==key){
+        	count++;
             pos=mid;
+            count++;
             break;
+            count++;
         }
-        else if(arr[mid]>key)
+        else if(arr[mid]>key){
+        	count++;
           ul=mid-1;
-        else if(arr[mid]<key)
+          count++;
+      }
+        else if(arr[mid]<key){
+        	count++;
           ll=mid+1;
-    }
+          count++;
+      }
+    }count++;
     return pos;
+    count++;
+    
 }
 
-void main(){
+int main(){
     int key,size;
-    printf("Enter the no. of elements wnat to enter: ");
+    printf("Enter the no. of elements want to enter: ");
     scanf("%d",&size);
 
     int arr[size];
@@ -78,15 +92,29 @@ void main(){
     scanf("%d",&key);
 
     int res=bs(arr,size,key);
+    count++;
 
     if(res>0)
       printf("%d found in position %d",key,res);
     else if(res<0)
       printf("Element not found...");
+      
+      printf("\n");
+      printf("time complexity:%d",count);
 }
 
 output:
 
+Enter the no. of elements want to enter: 5
+Enter the elements:
+12
+45
+67
+34
+56
+Enter the element to be found: 67
+67 found in position 2
+time complexity:6
 
 
 3.armstrong number
