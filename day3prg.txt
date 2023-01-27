@@ -1,0 +1,257 @@
+2.strassen multiplication:
+
+#include<stdio.h>
+int main()
+{
+	int a[2][2], b[2][2], c[2][2], i, j;
+	int m1, m2, m3, m4 , m5, m6, m7;
+	int count=0;
+	printf("Enter the 4 elements of first matrix: ");
+	  for(i = 0;i < 2; i++)
+	  {
+	  	count++;
+	  	for(j = 0;j < 2; j++){
+	  		   count++;
+	           scanf("%d", &a[i][j]);
+	       }
+      }
+      count++;
+      count++;
+	 
+	printf("Enter the 4 elements of second matrix: ");
+	  for(i = 0; i < 2; i++){
+	  	  count++;
+	      for(j = 0;j < 2; j++){
+	      	   count++;
+	           scanf("%d", &b[i][j]);
+	       }
+	   }
+	   count++;
+	 
+	  printf("\nThe first matrix is\n");
+  for(i = 0; i < 2; i++){
+  	      count++;
+	      printf("\n");
+	      for(j = 0; j < 2; j++){
+	      	   count++;
+	           printf("%d\t", a[i][j]);
+	    }
+	  }
+	  count++;
+	  count++;
+	 
+    printf("\nThe second matrix is\n");
+	  for(i = 0;i < 2; i++){
+	  	  count++;
+	      printf("\n");
+	      for(j = 0;j < 2; j++){
+	       count++;
+           printf("%d\t", b[i][j]);
+       }
+  }
+  count++;
+  count++;
+  m1= (a[0][0] + a[1][1]) * (b[0][0] + b[1][1]);
+  m2= (a[1][0] + a[1][1]) * b[0][0];
+  m3= a[0][0] * (b[0][1] - b[1][1]);
+  m4= a[1][1] * (b[1][0] - b[0][0]);
+  m5= (a[0][0] + a[0][1]) * b[1][1];
+  m6= (a[1][0] - a[0][0]) * (b[0][0]+b[0][1]);
+	  m7= (a[0][1] - a[1][1]) * (b[1][0]+b[1][1]);
+	 
+  c[0][0] = m1 + m4- m5 + m7;
+	  c[0][1] = m3 + m5;
+	  c[1][0] = m2 + m4;
+	  c[1][1] = m1 - m2 + m3 + m6;
+	 
+	   printf("\nAfter multiplication using Strassen's algorithm \n");
+	   for(i = 0; i < 2 ; i++){
+	   	  count++;
+	      printf("\n");
+      for(j = 0;j < 2; j++){
+      	       count++;
+	           printf("%d\t", c[i][j]);
+	       }
+   }
+   count++;
+   count++;
+   printf("%d",count);
+	}
+
+output:
+
+Enter the 4 elements of first matrix: 1 2 3 4
+Enter the 4 elements of second matrix: 5 6 7 8
+
+The first matrix is
+
+1       2
+3       4
+The second matrix is
+
+5       6
+7       8
+After multiplication using Strassen's algorithm
+
+19      22
+43      50      
+time complexity:39
+
+3.Finding max and min using divide and conquer strategy
+
+#include<stdio.h>
+#include<stdio.h>
+int max, min;
+int a[100],count=0;
+void maxmin(int i, int j)
+{
+ int max1, min1, mid;
+ if(i==j)
+ {
+ 	count++;
+  max = min = a[i];
+  count++;
+ }
+ else
+ {
+  if(i == j-1)
+  {
+   if(a[i] <a[j])
+   {
+    max = a[j];
+    count++;
+    min = a[i];
+    count++;
+   }
+   else
+   {
+    max = a[i];
+    count++;
+    min = a[j];
+    count++;
+   }
+  }
+  else
+  {
+   mid = (i+j)/2;
+   count++;
+   maxmin(i, mid);
+   count++;
+   max1 = max; min1 = min;
+   count++;
+   maxmin(mid+1, j);
+   count++;
+   if(max <max1)
+    max = max1;
+   if(min > min1)
+    min = min1;
+   }
+ count++;}
+}
+
+int main ()
+{
+ int i, num;
+ printf ("\nEnter the total number of numbers : ");
+ scanf ("%d",&num);
+ printf ("Enter the numbers : \n");
+ for (i=1;i<=num;i++)
+  scanf ("%d",&a[i]);
+
+ max = a[0];
+ count++;
+ min = a[0];
+ count++;
+ maxmin(1, num);
+ count++;
+ printf ("Minimum element in an array : %d\n", min);
+ printf ("Maximum element in an array : %d\n", max);
+ printf("time complexity %d",count);
+ return 0;
+}
+
+output:
+
+Enter the total number of numbers : 5
+Enter the numbers :
+23
+45
+67
+2
+78
+Minimum element in an array : 2
+Maximum element in an array : 78
+time complexity 21
+
+5.binary search
+
+#include<stdio.h>
+int count=0;
+int bs(int arr[],int size,int key){
+    int ll=0,ul=size-1,mid,pos=-1;
+    while (ll<=ul)
+    {
+    	count++;
+	mid=(ll+ul)/2;
+	    count++;
+        if(arr[mid]==key){
+        	count++;
+            pos=mid;
+            count++;
+            break;
+            count++;
+        }
+        else if(arr[mid]>key){
+        	count++;
+          ul=mid-1;
+          count++;
+      }
+        else if(arr[mid]<key){
+        	count++;
+          ll=mid+1;
+          count++;
+      }
+    }count++;
+    return pos;
+    count++;
+    
+}
+
+int main(){
+    int key,size;
+    printf("Enter the no. of elements want to enter: ");
+    scanf("%d",&size);
+
+    int arr[size];
+
+    printf("Enter the elements: \n");
+    for(int i=0;i<size;i++)
+     scanf("%d",&arr[i]);
+
+    printf("Enter the element to be found: ");
+    scanf("%d",&key);
+
+    int res=bs(arr,size,key);
+    count++;
+
+    if(res>0)
+      printf("%d found in position %d",key,res);
+    else if(res<0)
+      printf("Element not found...");
+      
+      printf("\n");
+      printf("time complexity:%d",count);
+}
+
+output:
+
+Enter the no. of elements want to enter: 5
+Enter the elements:
+12
+45
+67
+34
+56
+Enter the element to be found: 67
+67 found in position 2
+time complexity:6
