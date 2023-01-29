@@ -1,3 +1,81 @@
+1.backtracking:
+
+#include <stdio.h>
+#define TRUE 1
+#define FALSE 0
+int inc[50],w[50],sum,n;
+void sumset(int i,int wt,int total);
+int promising(int i,int wt,int total) {
+	return(((wt+total)>=sum)&&((wt==sum)||(wt+w[i+1]<=sum)));
+}
+void main() {
+	int i,j,n,temp,total=0;
+	printf("\n Enter tot value: ");
+	scanf("%d",&n);
+	printf("\n Enter the elements:  ");
+	for (i=0;i<n;i++) {
+		scanf("%d",&w[i]);
+		total+=w[i];
+	}
+	printf("\n Input the sum value to create sub set: ");
+	scanf("%d",&sum);
+	for (i=0;i<=n;i++)
+	  for (j=0;j<n-1;j++)
+	   if(w[j]>w[j+1]) {
+		temp=w[j];
+		w[j]=w[j+1];
+		w[j+1]=temp;
+	}
+	printf("\n The given %d numbers in ascending order:\n",n);
+	for (i=0;i<n;i++)
+	  printf("%d \t",w[i]);
+	if((total<sum))
+	  printf("\n Subset construction is not possible"); else {
+		for (i=0;i<n;i++)
+		   inc[i]=0;
+		printf("\n The solution using backtracking is:\n");
+		sumset(-1,0,total);
+	}
+	
+}
+void sumset(int i,int wt,int total) {
+	int j;
+	if(promising(i,wt,total)) {
+		if(wt==sum) {
+			printf("\n{\t");
+			for (j=0;j<=i;j++)
+			    if(inc[j])
+			     printf("%d\t",w[j]);
+			printf("}\n");
+		} else {
+			inc[i+1]=TRUE;
+			sumset(i+1,wt+w[i+1],total-w[i+1]);
+			inc[i+1]=FALSE;
+			sumset(i+1,wt,total-w[i+1]);
+		}
+	}
+}
+
+output:
+
+Enter tot value: 5
+
+ Enter the elements:  6
+2
+8
+1
+5
+
+ Input the sum value to create sub set: 9
+
+ The given 5 numbers in ascending order:
+1       2       5       6       8
+ The solution using backtracking is:
+
+{       1       2       6       }
+
+{       1       8       }
+
 2.strassen multiplication:
 
 #include<stdio.h>
@@ -183,6 +261,129 @@ Minimum element in an array : 2
 Maximum element in an array : 78
 time complexity 21
 
+4.merge sort
+
+#include<stdlib.h>
+#include<stdio.h>
+// Merge Function
+int count=0;
+int merge(int arr[], int l, int m, int r)
+{
+int i, j, k;
+int n1 = m - l + 1;
+count++;
+int n2 = r - m;
+count++;
+int L[n1], R[n2];
+for (i = 0; i < n1; i++){
+    count++;
+    L[i] = arr[l + i];
+    count++;
+}count++;
+ 
+for (j = 0; j < n2; j++){
+    count++;
+    R[j] = arr[m + 1+ j];
+    count++;
+}count++;
+
+i = 0;
+count++;
+j = 0;
+count++;
+k = l;
+count++;
+while (i < n1 && j < n2)
+{count++;
+if (L[i] <= R[j])
+{count++;
+arr[k] = L[i];
+count++;
+i++;
+count++;
+}
+else
+{count++;
+arr[k] = R[j];
+count++;
+j++;
+count++;
+}
+k++;
+count++;
+}count++;
+while (i < n1)
+{count++;
+arr[k] = L[i];
+count++;
+i++;
+count++;
+k++;
+count++;
+}count++;
+while (j < n2)
+{count++;
+arr[k] = R[j];
+count++;
+j++;
+count++;
+k++;
+count++;
+}count++;
+return count;
+}
+
+int mergeSort(int arr[], int l, int r)
+{
+if (l < r)
+{count++;
+int m = l+(r-l)/2;
+count++;
+mergeSort(arr, l, m);
+count++;
+mergeSort(arr, m+1, r);
+count++;
+int res=merge(arr, l, m, r);
+count++;
+return res+count;
+}
+}
+
+int printArray(int A[], int size)
+{
+int i,count=0;
+printf("\n");
+for (i=0; i < size; i++){
+    count++;
+    printf("%d ", A[i]);
+}count++;
+
+return count;
+ 
+}
+
+int main()
+{
+int arr[] = {85, 24, 63, 45, 17, 31, 96, 50};
+int arr_size = sizeof(arr)/sizeof(arr[0]);
+int res;
+printf("\nGiven array is: ");
+res+=printArray(arr, arr_size);
+res+=mergeSort(arr, 0, arr_size - 1);
+printf("\nSorted array is: ");
+res+=printArray(arr, arr_size);
+printf("\nTime Complexity: %d",res);
+return 0;
+}
+
+output:
+
+Given array is:
+85 24 63 45 17 31 96 50
+Sorted array is:
+17 24 31 45 50 63 85 96
+Time Complexity: 563
+
 5.binary search
 
 #include<stdio.h>
@@ -255,3 +456,71 @@ Enter the elements:
 Enter the element to be found: 67
 67 found in position 2
 time complexity:6
+
+6.minimum spanning tree
+
+#include <stdio.h>
+#include <limits.h>
+ 
+#define V 5
+ 
+int minKey(int key[], int mstSet[]) {
+    int min = INT_MAX, min_index;
+    int v;
+    for (v = 0; v < V; v++)
+        if (mstSet[v] == 0 && key[v] < min)
+            min = key[v], min_index = v;
+ 
+    return min_index;
+}
+ 
+int printMST(int parent[], int n, int graph[V][V]) {
+    int i;
+    printf("Edge   Weight\n");
+    for (i = 1; i < V; i++)
+        printf("%d - %d    %d \n", parent[i], i, graph[i][parent[i]]);
+}
+ 
+void primMST(int graph[V][V]) {
+    int parent[V]; 
+    int key[V], i, v, count; 
+    int mstSet[V]; 
+ 
+    
+    for (i = 0; i < V; i++)
+        key[i] = INT_MAX, mstSet[i] = 0;
+ 
+    
+    key[0] = 0; 
+    parent[0] = -1; 
+ 
+
+    for (count = 0; count < V - 1; count++) {
+        int u = minKey(key, mstSet);
+        mstSet[u] = 1;
+ 
+        for (v = 0; v < V; v++)
+ 
+            if (graph[u][v] && mstSet[v] == 0 && graph[u][v] < key[v])
+                parent[v] = u, key[v] = graph[u][v];
+    }
+     printMST(parent, V, graph);
+}
+ 
+int main() {
+
+    int graph[V][V] = { { 0, 2, 0, 6, 0 }, { 2, 0, 3, 8, 5 },
+            { 0, 3, 0, 0, 7 }, { 6, 8, 0, 0, 9 }, { 0, 5, 7, 9, 0 }, };
+ 
+    primMST(graph);
+ 
+    return 0;
+}
+
+output:
+
+Edge   Weight
+0 - 1    2
+1 - 2    3
+0 - 3    6
+1 - 4    5
